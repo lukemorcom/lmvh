@@ -1,0 +1,45 @@
+services:
+#   valheim:
+#     platform: linux/amd64
+#     image: ghcr.io/lloesche/valheim-server
+#     cap_add:
+#       - sys_nice
+#     volumes:
+#       - $HOME/valheim-server/config:/config
+#       - $HOME/valheim-server/data:/opt/valheim
+#     ports:
+#       - "2456-2458:2456-2458/udp"
+#       - "9001:9001/tcp"
+#     environment:
+#       SERVER_NAME: "LM VH"
+#       WORLD_NAME: "Cornwall"
+#       SERVER_PASS: "move-this"
+#       SERVER_PUBLIC: "false"
+#     restart: always
+#     stop_grace_period: 2m
+
+  php:
+    platform: linux/amd64
+    image: php:fpm
+    restart: unless-stopped
+    working_dir: /app
+    ports:
+      - "9001:9000"
+    volumes:
+      - .:/app
+    networks:
+      - lmvhn
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - .:/app
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - '80:80'
+    networks:
+      - lmvhn
+      
+networks:
+  lmvhn:
+    driver: bridge
