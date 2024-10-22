@@ -19,13 +19,12 @@ services:
 
   php:
     platform: linux/amd64
-    image: php:fpm
+    build: ./php
     restart: unless-stopped
-    working_dir: /app
     ports:
       - "9001:9000"
     volumes:
-      - ./vhapi:/vhapi
+      - ./vhapi:/var/www/html
     networks:
       - lmvhn
 
