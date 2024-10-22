@@ -9,7 +9,6 @@ services:
       - $HOME/valheim-server/data:/opt/valheim
     ports:
       - "2456-2458:2456-2458/udp"
-      - "9001:9001/tcp"
     environment:
       SERVER_NAME: "LM VH"
       WORLD_NAME: "Cornwall"
