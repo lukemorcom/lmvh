@@ -5,15 +5,11 @@ services:
     cap_add:
       - sys_nice
     volumes:
-      - $HOME/valheim-server/config:/config
-      - $HOME/valheim-server/data:/opt/valheim
+      - /valheim-server/config:/config
+      - /valheim-server/data:/opt/valheim
     ports:
       - "2456-2458:2456-2458/udp"
-    environment:
-      SERVER_NAME: "LM VH"
-      WORLD_NAME: "Cornwall"
-      SERVER_PASS: "change-this"
-      SERVER_PUBLIC: "false"
+    env_file: ./vh/.env
     restart: always
     stop_grace_period: 2m
 
