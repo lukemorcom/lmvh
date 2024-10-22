@@ -24,7 +24,7 @@ services:
     ports:
       - "9001:9000"
     volumes:
-      - ./vhapi:/var/www/html
+      - ./vhapi:/vhapi
     networks:
       - lmvhn
 
